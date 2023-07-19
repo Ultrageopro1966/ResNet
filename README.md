@@ -29,7 +29,7 @@
 
 ![AccuracyGraph](https://github.com/Ultrageopro1966/ResNet/assets/120571667/4818f901-c7bf-4e17-93d0-773d4b732d9b)
 
-> Результат обучения модели (21 место по версии [paperswithcode](https://paperswithcode.com/sota/image-classification-on-mnist?metric=Accuracy)) 
+> Результат обучения модели (21 место в мире по версии [paperswithcode](https://paperswithcode.com/sota/image-classification-on-mnist?metric=Accuracy)) 
 
 ## Зависимости
 - TensorFlow 2.x
