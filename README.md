@@ -6,7 +6,7 @@
 
 ![ResBlock](https://github.com/Ultrageopro1966/ResNet/assets/120571667/61ab44e5-f592-476a-8794-a7c8c400f1ac)
 
-> Архитектура Сети
+> Архитектура составного блока ResNet
 
 ## Структура репозитория
 - `Layers.py` - Файл с определением классов ResidualConvBlock и ResidualIdentitiBlock, которые используются в модели ResNet.
