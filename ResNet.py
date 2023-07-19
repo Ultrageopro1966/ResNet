@@ -4,6 +4,40 @@ from keras import Model, layers
 # Импортируем пользовательские классы слоев ResidualConvBlock и ResidualIdentitiBlock
 from Layers import ResidualConvBlock, ResidualIdentitiBlock
 
+"""
+Model: "res_net"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #
+=================================================================
+ reshape (Reshape)           multiple                  0
+
+ residual_conv_block (Residu  multiple                 9888
+ alConvBlock)
+
+ residual_identiti_block (Re  multiple                 18752
+ sidualIdentitiBlock)
+
+ residual_conv_block_1 (Resi  multiple                 58048
+ dualConvBlock)
+
+ residual_identiti_block_1 (  multiple                 74368
+ ResidualIdentitiBlock)
+
+ average_pooling2d (AverageP  multiple                 0
+ ooling2D)
+
+ flatten (Flatten)           multiple                  0
+
+ dense (Dense)               multiple                  295424
+
+ dense_1 (Dense)             multiple                  5130
+
+=================================================================
+Total params: 461,610
+Trainable params: 460,842
+Non-trainable params: 768
+_________________________________________________________________
+"""
 
 # Определяем класс ResNet, который наследуется от класса Model из Keras
 class ResNet(Model):
