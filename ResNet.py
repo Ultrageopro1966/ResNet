@@ -1,9 +1,8 @@
-from keras import layers
 # Import necessary modules from Keras
 from keras import Model, layers
 
 # Import custom layer classes ResidualConvBlock and ResidualIdentityBlock
-from Layers import ResidualConvBlock, ResidualIdentityBlock
+from Layers import ResidualConvBlock, ResidualIdentitiBlock
 
 """
 Model: "res_net"
@@ -40,6 +39,7 @@ Non-trainable params: 768
 _________________________________________________________________
 """
 
+
 # Define the ResNet class, which inherits from the Model class in Keras
 class ResNet(Model):
     def __init__(self):
@@ -51,11 +51,11 @@ class ResNet(Model):
 
         # Initialize the ResidualConvBlock and ResidualIdentityBlock layers with 32 filters
         self.res1 = ResidualConvBlock(32)
-        self.res2 = ResidualIdentityBlock(32)
+        self.res2 = ResidualIdentitiBlock(32)
 
         # Initialize the ResidualConvBlock and ResidualIdentityBlock layers with 64 filters
         self.res3 = ResidualConvBlock(64)
-        self.res4 = ResidualIdentityBlock(64)
+        self.res4 = ResidualIdentitiBlock(64)
 
         # Initialize the AveragePooling2D and Flatten layers for pooling and flattening the data
         self.avg_pool = layers.AveragePooling2D()
