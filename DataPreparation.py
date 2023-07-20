@@ -1,51 +1,52 @@
 from configparser import (
-    ConfigParser,  # Импорт класса ConfigParser для работы с файлами конфигурации
+    ConfigParser,  # Importing ConfigParser class to work with configuration files
 )
 
-import tensorflow as tf  # Импорт TensorFlow
-from keras.datasets import mnist  # Импорт данных MNIST из Keras
+import tensorflow as tf  # Importing TensorFlow
+from keras import layers
+from keras.datasets import mnist  # Importing MNIST data from Keras
 from keras.utils import (
-    to_categorical,  # Импорт функции to_categorical для преобразования меток в one-hot encoding
+    to_categorical,  # Importing to_categorical function for one-hot encoding of labels
 )
 
-# Создание экземпляра ConfigParser для чтения параметров из файла конфигурации
+# Creating an instance of ConfigParser to read parameters from the configuration file
 parser: ConfigParser = ConfigParser()
 parser.read("configs.ini")
 
-# Получение значения learning_rate из конфигурации и присвоение его переменной LEARNING_RATE
+# Getting the value of learning_rate from the configuration and assigning it to the variable LEARNING_RATE
 LEARNING_RATE: float = float(parser["DEFAULT"]["learning_rate"])
 
-# Получение значения batch_size из конфигурации и присвоение его переменной BATCH_SIZE
+# Getting the value of batch_size from the configuration and assigning it to the variable BATCH_SIZE
 BATCH_SIZE: int = int(parser["DEFAULT"]["batch_size"])
 
-# Получение значения epochs из конфигурации и присвоение его переменной EPOCHS
+# Getting the value of epochs from the configuration and assigning it to the variable EPOCHS
 EPOCHS: int = int(parser["DEFAULT"]["epochs"])
 
-# Загрузка данных MNIST и разделение на тренировочный и тестовый наборы
+# Loading MNIST data and splitting it into training and testing sets
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-# Преобразование меток в категориальные (one-hot encoding)
+# Converting labels to categorical (one-hot encoding)
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
-# Преобразование данных в тензоры TensorFlow
+# Converting data to TensorFlow tensors
 x_train, y_train = tf.convert_to_tensor(x_train), tf.convert_to_tensor(y_train)
 x_test, y_test = tf.convert_to_tensor(x_test), tf.convert_to_tensor(y_test)
 
-# Нормализация данных (приведение значений пикселей к диапазону [0, 1])
+# Normalizing data (scaling pixel values to the range [0, 1])
 x_train /= 255
 x_test /= 255
 
-# Создание тренировочного набора данных в виде TensorFlow Dataset
+# Creating a training dataset as a TensorFlow Dataset
 train_dataset: tf.data.Dataset = (
     tf.data.Dataset.from_tensor_slices((x_train, y_train))
-    .shuffle(1000)  # Перемешивание данных
-    .batch(BATCH_SIZE)  # Разбиение на батчи
+    .shuffle(1000)  # Shuffling data
+    .batch(BATCH_SIZE)  # Splitting into batches
 )
 
-# Создание тестового набора данных в виде TensorFlow Dataset
+# Creating a test dataset as a TensorFlow Dataset
 test_dataset: tf.data.Dataset = (
     tf.data.Dataset.from_tensor_slices((x_test, y_test))
-    .shuffle(1000)  # Перемешивание данных
-    .batch(BATCH_SIZE)  # Разбиение на батчи
+    .shuffle(1000)  # Shuffling data
+    .batch(BATCH_SIZE)  # Splitting into batches
 )
