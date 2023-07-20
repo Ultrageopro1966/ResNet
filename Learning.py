@@ -3,7 +3,7 @@ from keras.losses import categorical_crossentropy
 from keras.metrics import CategoricalAccuracy, Mean
 from keras.optimizers import Adam
 
-# Импорт необходимых переменных и данных для обучения и тестирования модели
+# Import necessary variables and data for model training and testing
 from DataPreparation import (
     BATCH_SIZE,
     EPOCHS,
@@ -12,25 +12,24 @@ from DataPreparation import (
     train_dataset,
 )
 
-# Импорт определенных слоев ResNet
+# Import ResNet defined layers
 from ResNet import ResNet
 
-# Создание экземпляра модели ResNet
+# Create an instance of the ResNet model
 model: ResNet = ResNet()
 
-# Определение оптимизатора для обучения модели
+# Define the optimizer for model training
 optimizer: tf.keras.optimizers.Optimizer = Adam(LEARNING_RATE)
 
-# Определение функции потерь (loss function) для обучения модели
+# Define the loss function for model training
 loss_func = categorical_crossentropy
 
-# Определение метрик для отслеживания производительности модели во время обучения и тестирования
+# Define metrics to track model performance during training and testing
 train_loss: Mean = Mean()
 train_accuracy: CategoricalAccuracy = CategoricalAccuracy()
 test_accuracy: CategoricalAccuracy = CategoricalAccuracy()
 
-
-# Определение функции обучающего шага (train_step) с использованием декоратора @tf.function
+# Define the training step function (train_step) using the @tf.function decorator
 @tf.function
 def train_step(images, labels):
     with tf.GradientTape() as tape:
@@ -42,21 +41,19 @@ def train_step(images, labels):
     train_loss(loss)
     train_accuracy(labels, prediction)
 
-
-# Определение функции тестового шага (test_step) с использованием декоратора @tf.function
+# Define the testing step function (test_step) using the @tf.function decorator
 @tf.function
 def test_step(images, labels):
     prediction: tf.Tensor = model(images)
     test_accuracy(labels, prediction)
 
-
-# Импорт необходимых библиотек для построения графика точности в процессе обучения
+# Import necessary libraries for plotting the accuracy graph during training
 from matplotlib import pyplot as plt
 
-# Создание списка для сохранения значений точности в процессе обучения
+# Create a list to store accuracy values during training
 accuracy_y_data: list = []
 
-# Цикл обучения модели на заданное количество эпох
+# Loop through the specified number of epochs for model training
 for epoch in range(EPOCHS):
     batch: int = 0
     for images, labels in train_dataset:
@@ -64,29 +61,29 @@ for epoch in range(EPOCHS):
         accuracy_y_data.append(float(train_accuracy.result().numpy()) * 100)
         batch += 1
 
-        # Вывод прогресса обучения на каждом шаге (эпохе и пакете)
+        # Display the training progress at each step (epoch and batch)
         print(" " * 100, end="\r")
         print(
             f"EPOCH {epoch + 1}/{EPOCHS}\tBATCH {batch}/{tf.data.experimental.cardinality(train_dataset)} ({round(batch/int(tf.data.experimental.cardinality(train_dataset)) * 100)}%)\tloss = {round(float(train_loss.result().numpy()), 3)}\taccuracy = {round(train_accuracy.result().numpy() * 100)}%",
             end="\r",
         )
 
-# Сохранение обученной модели
+# Save the trained model weights
 model.save_weights("ResNet_Weights.h5")
 
-# Тестирование модели на тестовом наборе данных
+# Test the model on the test dataset
 print("\nModel testing...")
 for images, labels in test_dataset:
     test_step(images, labels)
 
-# Вывод точности на тестовом наборе данных
+# Display the accuracy on the test dataset
 print(f"Test Accuracy {round(test_accuracy.result().numpy() * 100, 3)}%")
 
-# Построение графика точности модели
+# Plot the model accuracy graph
 plt.plot(
     accuracy_y_data,
     c="b",
-    label=f"Accuracy в процессе обучения ({round(max(accuracy_y_data), 4)}%)",
+    label=f"Accuracy during training ({round(max(accuracy_y_data), 4)}%)",
 )
 plt.plot(
     [0, len(accuracy_y_data)],
@@ -95,11 +92,11 @@ plt.plot(
         round(test_accuracy.result().numpy() * 100, 3),
     ],
     c="r",
-    label=f"Accuracy на тестовой выборке ({round(test_accuracy.result().numpy() * 100, 3)}%)",
+    label=f"Accuracy on test dataset ({round(test_accuracy.result().numpy() * 100, 3)}%)",
 )
 plt.xlabel("Batch")
 plt.ylabel("Accuracy, %")
-plt.title("Accuracy модели")
+plt.title("Accuracy")
 
 plt.grid(which="major")
 plt.grid(which="minor", linestyle=":")
