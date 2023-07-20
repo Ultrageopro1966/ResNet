@@ -1,42 +1,42 @@
-# ResNet модель для классификации изображений
-## Описание модели
-Данный репозиторий содержит реализацию модели **ResNet** (460,842 параметров) для классификации изображений (датасет mnist). Модель реализована с использованием библиотеки Keras.
+# ResNet model for image classification
+## Description of the model
+This repository contains the implementation of the **ResNet** model (460,842 parameters) for image classification (mnist dataset). The model is implemented using the Keras library.
 
-Остаточная нейронная сеть (также известная как Остаточная сеть, ResNet ) — это модель глубокого обучения, в которой весовые слои изучают остаточные функции со ссылкой на входные данные слоя. Архитектура таких сетей позволяет избежать затухающего/взрывающегося градиента, улучшает проходимость BackProp для больших/огромных сверточных моделей.
+Residual Neural Network (also known as Residual Network, ResNet ) is a deep learning model in which weight layers learn residual functions with reference to layer inputs. The architecture of such networks avoids the fading/exploding gradient, improves BackProp patency for large/huge convolutional models.
 
 ![ResBlock](https://github.com/Ultrageopro1966/ResNet/assets/120571667/61ab44e5-f592-476a-8794-a7c8c400f1ac)
 
-> Архитектура составного блока ResNet
+> ResNet building block architecture
 
-## Структура репозитория
-- `Layers.py` - Файл с определением классов ResidualConvBlock и ResidualIdentitiBlock, которые используются в модели ResNet.
-- `ResNet.py` - Файл с определением класса ResNet, который представляет собой ResNet модель для классификации изображений.
-- `DataPreparation.py` - Файл с предварительной обработкой данных и подготовкой датасетов для обучения и тестирования модели.
-- `Learing.py` - Файл с обучением модели ResNet на предварительно подготовленных данных и визуализацей результатов обучения.
-- `ResNet_Weights.h5` - Файл, в котором сохранены обученные веса модели.
-- `configs.ini` - Файл, в котором указаны настройки модели
-## Использование
-Установите необходимые зависимости, указанные в `requirements.txt`
+## Repository structure
+- `Layers.py` - A file that defines the ResidualConvBlock and ResidualIdentitiBlock classes that are used in the ResNet model.
+- `ResNet.py` - ResNet class definition file, which is a ResNet model for image classification.
+- `DataPreparation.py` - A file with data preprocessing and preparation of datasets for training and testing the model.
+- `Learing.py` - A file with training a ResNet model on pre-trained data and visualization of training results.
+- `ResNet_Weights.h5` - The file where the trained weights of the model are saved.
+- `configs.ini` - File containing model settings
+## Usage
+Install the required dependencies listed in `requirements.txt`
 
-Запустите Learning.py, чтобы обучить модель на предварительно подготовленных данных и сохранить обученные веса в файл ResNet_Weights.h5.
-Модель может быть использована для классификации изображений путем загрузки весов из ResNet_Weights.h5 и применения к новым данным.
+Run Learning.py to train the model on the pretrained data and save the trained weights to the ResNet_Weights.h5 file.
+The model can be used to classify images by loading weights from ResNet_Weights.h5 and applying them to new data.
 
-## Результат подготовки данных/обучения
+## Result of data preparation/training
 ![mnist](https://github.com/Ultrageopro1966/ResNet/assets/120571667/879c5d67-8258-44ba-8894-eed421454b53)
 
-> Пример изображений цифр
+> Sample images of numbers
 
 ![AccuracyGraph](https://github.com/Ultrageopro1966/ResNet/assets/120571667/4818f901-c7bf-4e17-93d0-773d4b732d9b)
 
-> Результат обучения модели (21 место в мире по версии [paperswithcode](https://paperswithcode.com/sota/image-classification-on-mnist?metric=Accuracy)) 
+> Model training outcome (21st in the world according to [paperswithcode](https://paperswithcode.com/sota/image-classification-on-mnist?metric=Accuracy))
 
-## Зависимости
-- TensorFlow 2.x
+## Dependencies
+- Tensorflow 2.x
 - NumPy
-- Matplotlib
+- matplotlib
 
-## Автор
+## Author
 [UltraGeoPro](https://github.com/Ultrageopro1966)
 
-## Лицензия
-Модель ResNet и код в данном репозитории доступны по лицензии MIT. Подробности см. в файле LICENSE.
+## License
+The ResNet model and code in this repository are available under the MIT license. See the LICENSE file for details.
