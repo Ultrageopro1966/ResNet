@@ -26,7 +26,7 @@ The model can be used to classify images by loading weights from ResNet_Weights.
 
 > Sample images of numbers
 
-![AccuracyGraph](https://github.com/Ultrageopro1966/ResNet/assets/120571667/4818f901-c7bf-4e17-93d0-773d4b732d9b)
+![AccuracyGraph](https://github.com/Ultrageopro1966/ResNet/assets/120571667/fc9862ea-51eb-4ff6-a2a5-321f92b19b89)
 
 > Model training outcome (21st in the world according to [paperswithcode](https://paperswithcode.com/sota/image-classification-on-mnist?metric=Accuracy))
 
